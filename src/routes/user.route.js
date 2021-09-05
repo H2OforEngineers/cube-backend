@@ -1,4 +1,12 @@
 'use strict'
+
+
+
+const userCtrl = require('../auth/middleware/userCtrl')
+const auth = require('../auth/middleware/auth')
+
+
+
 const express = require('express');
 const base64 = require('base-64');
 const bcrypt = require('bcrypt');
@@ -37,7 +45,18 @@ router.get('/users', bearerAuth, permissions("delete"), async (req, res, next) =
   res.status(200).json(list);
 });
 
+// ================================
 
+
+// router.post('/register', userCtrl.register)
+
+// router.post('/login', userCtrl.login)
+
+// router.get('/logout', userCtrl.logout)
+
+// router.get('/refresh_token', userCtrl.refreshToken)
+
+// router.get('/infor', auth,  userCtrl.getUser)
 
 // router.put('/users/:id', bearerAuth, permissions("update"), async(req, res) => {
  

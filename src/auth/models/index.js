@@ -15,5 +15,6 @@ const Collection = require('./data-collection');
 module.exports = {
     db: sequelize,
     product: new Collection(product),
-      users: userModel(sequelize, DataTypes)
+      users: userModel(sequelize, DataTypes),
+    
 };
