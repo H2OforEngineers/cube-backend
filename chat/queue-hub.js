@@ -60,7 +60,7 @@ family.on('connection', socket=> {
     console.log('received on queue will remove it ...');
     // he child confirmed receiving , remove from queue
     delete usermsgQueue.messages[msg.id];
-    console.log('after delete usermsgQueue @@@@@@@@@@ ', usermsgQueue);
+    console.log('after delete usermsgQueue @@@@@@@@@ ', usermsgQueue);
   });
 
   socket.on('user_received', msg => {
