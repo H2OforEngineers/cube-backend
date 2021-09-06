@@ -2,10 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-// const {product} = require('../auth/models/index');
 const dataModules = require('../auth/models/index');
-
-
 const bearerAuth = require('../auth/middleware/bearer.middle');
 const permissions = require('../auth/middleware/acl.middle');
 
@@ -24,7 +21,6 @@ router.get('/:model',bearerAuth, getAllProducts);
 
 //get product by ID
 router.get('/:model/:id',bearerAuth, permissions('read'), getOneProducts);
-
 router.post('/:model',bearerAuth,permissions('create'),createProduct);
 router.put('/:model/:id',bearerAuth,permissions('update'), updateProduct);
 router.delete('/:model/:id',bearerAuth, permissions('delete'),deleteProduct);
@@ -70,19 +66,4 @@ async function deleteProduct(req, res) {
 
 
 
-
-
-router.post('/signup', async (req, res, next) => {
-  try {
-    let userRecord = await users.create(req.body);
-    console.log('userRecord--------->', userRecord);
-    const output = {
-      user: userRecord,
-      token: userRecord.token,
-    };
-    res.status(201).json(output);
-  } catch (e) {
-    next(e.message);
-  }
-});
 module.exports = router; 

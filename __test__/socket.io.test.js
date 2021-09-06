@@ -1,8 +1,6 @@
 'use strict';
 require("dotenv").config();
 
-
-
 const {getCurrentUser, userLeave, getRoomUsers} = require('../src/server')
 
 

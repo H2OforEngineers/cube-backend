@@ -49,7 +49,7 @@ class Collection {
 
     try {
       let deleted = await this.model.destroy({where: {id}});
-      return deleted; // or return directly withot creating a variable
+      return deleted; // or return directly without creating a variable
     } catch(e) {
       console.error('error deleting the record for model: ', this.model.name, `id: ${id}`);
     }
