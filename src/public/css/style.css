@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-	--dark-color-a: #0c0c0c;
-	--dark-color-b: #5a5a5c;
+	--dark-color-a: #7e9a9a;
+	--dark-color-b: #7e9a9a;
 	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
@@ -33,7 +33,8 @@ a {
 	cursor: pointer;
 	padding: 5px 15px;
 	background: var(--light-color);
-	color: var(--dark-color-a);
+	/* color: var(--dark-color-a); */
+	color: black;
 	border: 0;
 	font-size: 17px;
 }
@@ -49,7 +50,7 @@ a {
 
 .chat-header {
 	background: var(--dark-color-a);
-	color: #fff;
+	color: #f6d8ac;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding: 15px;
@@ -65,7 +66,7 @@ a {
 
 .chat-sidebar {
 	background: var(--dark-color-b);
-	color: #fff;
+	color:#f6d8ac;
 	padding: 20px 20px 60px;
 	overflow-y: scroll;
 }
@@ -89,6 +90,7 @@ a {
 	padding: 30px;
 	max-height: 500px;
 	overflow-y: scroll;
+	background-color: rgb(61, 61, 61);
 }
 
 .chat-messages .message {
@@ -108,7 +110,7 @@ a {
 }
 
 .chat-messages .message .meta span {
-	color: #777;
+	color: rgb(20, 20, 20);
 }
 
 .chat-form-container {
@@ -125,6 +127,7 @@ a {
 	padding: 5px;
 	height: 40px;
 	flex: 1;
+	background-color: #f6d8ac;
 }
 
 /* Join Page */
@@ -177,6 +180,7 @@ a {
 .join-main .btn {
 	margin-top: 20px;
 	width: 100%;
+	color: black;
 }
 
 @media (max-width: 700px) {
