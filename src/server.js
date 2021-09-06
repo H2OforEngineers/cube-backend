@@ -31,9 +31,6 @@ const Queue = require('./utils/Queue');
 // to save msg for the stream 
 let msgQueue = new Queue();
 
-app.get('/',(req,res)=>{
-  res.send('im live =====================');
-});
 
 // Set static folder//i want public folder to set as static folder to access html pages (chat.html,index.html)
 app.use(express.static(path.join(__dirname, './public'))); //after this we can open http//:localhost:300
@@ -122,6 +119,10 @@ io.on('connection', socket => {
 });
 
 //=================================================
+
+app.get('/home',(req,res)=>{
+  res.send('im live =====================');
+});
 
 app.use('*', notFound);
 app.use(errorHandler);
