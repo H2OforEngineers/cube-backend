@@ -8,7 +8,7 @@ const server = require('./src/server');
 
 
 db.sync().then(() => {
-  server.start(3000);
+  server.start(process.env.PORT || 3000);
 }).catch(e => {
   console.error('Could not start server', e.message);
 });
