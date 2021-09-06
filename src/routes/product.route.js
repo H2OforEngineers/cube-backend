@@ -2,10 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-// const {product} = require('../auth/models/index');
 const dataModules = require('../auth/models/index');
-
-
 const bearerAuth = require('../auth/middleware/bearer.middle');
 const permissions = require('../auth/middleware/acl.middle');
 
@@ -19,7 +16,11 @@ router.param('model', (req, res, next) => {
   }
 });
 
+//get all 
 router.get('/:model',bearerAuth, getAllProducts);
+
+//get product by ID
+router.get('/:model/:id',bearerAuth, permissions('read'), getOneProducts);
 router.post('/:model',bearerAuth,permissions('create'),createProduct);
 router.put('/:model/:id',bearerAuth,permissions('update'), updateProduct);
 router.delete('/:model/:id',bearerAuth, permissions('delete'),deleteProduct);
@@ -30,6 +31,16 @@ async function getAllProducts(req, res) {
   res.status(200).json(products);
 }
 
+
+async function getOneProducts(req, res) {
+  try {
+    const id = req.params.id;
+    let product = await req.model.read(id)
+    res.status(200).json(product);
+  }catch(err) {
+    throw new Error(err.message)
+  }
+}
 
 async function createProduct(req, res) {
   let newProduct = req.body;
@@ -52,4 +63,7 @@ async function deleteProduct(req, res) {
   res.status(200).json('Delete is Done ....!!!');
 }
   
+
+
+
 module.exports = router; 

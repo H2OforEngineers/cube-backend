@@ -4,21 +4,18 @@ const express = require('express');
 require('dotenv').config();
 const app = express();
 app.use(express.json());
-// const port = process.env.PORT || 3000;
-
 const productRouter = require('./routes/product.route');
 const userRouter = require('./routes/user.route');
-
 const http = require('http'); //package or module 
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-// const io = socketio(server);
-
 app.use('/product',productRouter);
 app.use(userRouter);
 
 
-// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+//=================================================
+
 const path = require('path'); //node js core module to read    public file?
 
 const formatMessage = require('./utils/messages');
@@ -34,15 +31,16 @@ const Queue = require('./utils/Queue');
 // to save msg for the stream 
 let msgQueue = new Queue();
 
-
-// Set static folder//i want puplic folder to set as static folder to access html pages (chat.html,index.html)
-app.use(express.static(path.join(__dirname, './public'))); //after this we can open http//:localhost:300
-
 app.get('/',(req,res)=>{
   res.send('im live =====================');
 });
+
+// Set static folder//i want public folder to set as static folder to access html pages (chat.html,index.html)
+app.use(express.static(path.join(__dirname, './public'))); //after this we can open http//:localhost:300
+
+
 const botName = 'Chat-App';
-// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+//=================================================
 
 const errorHandler = require('./error-handlers/500');
 const notFound = require('./error-handlers/404');
@@ -50,7 +48,7 @@ const notFound = require('./error-handlers/404');
 app.use(express.urlencoded({ extended: true }));
 
 
-// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+//=================================================
 io.on('connection', socket => {
   console.log('new WS connection');
   socket.on('joinRoom', ({
@@ -76,7 +74,7 @@ io.on('connection', socket => {
     // }
   
     // Broadcast when a user connects
-    //differnce between socket.emit ==> for the single client //socket.broadcast.emit====> all clients except the client that connecting
+    //difference between socket.emit ==> for the single client //socket.broadcast.emit====> all clients except the client that connecting
     //and io.emit =====> for all clients . 
   
     socket.broadcast.to(user.room).emit('message',
@@ -122,8 +120,8 @@ io.on('connection', socket => {
     }
   });
 });
-//3
-// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+//=================================================
 
 app.use('*', notFound);
 app.use(errorHandler);
