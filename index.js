@@ -6,7 +6,7 @@ const server = require('./src/server');
 const port = process.env.PORT || 8080;
 
 db.sync().then(() => {
-  server.start(process.env.PORT || 3000);
+  server.start(process.env.PORT || 8080);
 }).catch(e => {
   console.error('Could not start server', e.message);
 });

@@ -18,6 +18,7 @@ app.use('/product',productRouter);
 app.use(userRouter);
 
 
+
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 const path = require('path'); //node js core module to read    public file?
 
@@ -34,13 +35,14 @@ const Queue = require('./utils/Queue');
 // to save msg for the stream 
 let msgQueue = new Queue();
 
+app.get('/',(req,res)=>{
+  res.send('im live =====================');
+});
 
 // Set static folder//i want puplic folder to set as static folder to access html pages (chat.html,index.html)
 app.use(express.static(path.join(__dirname, './public'))); //after this we can open http//:localhost:300
 
-app.get('/',(req,res)=>{
-  res.send('im live =====================');
-});
+
 const botName = 'Chat-App';
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
