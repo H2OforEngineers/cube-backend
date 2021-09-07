@@ -17,7 +17,7 @@ router.param('model', (req, res, next) => {
 });
 
 //get all 
-router.get('/:model',bearerAuth, getAllProducts);
+router.get('/:model', getAllProducts);
 
 //get product by ID
 router.get('/:model/:id',bearerAuth, permissions('read'), getOneProducts);
