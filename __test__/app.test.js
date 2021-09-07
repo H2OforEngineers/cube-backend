@@ -6,11 +6,19 @@ const request = supertest(server);
 const base64 = require('base-64');
 
 
+let obj = {
+    title: 'car fixing',
+    image: 'tbfdsdsad3rg3egs54',
+    description: "car fix on computer",
+    phoneNumber: "07909090"
+
+}
+
 
 describe('Auth Tests', () => {
     let obj = {
-        username: 'sultan6111',
-        password: 'test@12341'
+        username: 'yzn3345',
+        password: 'yzn1222'
     }
 
     it('sign up test  ', async () => {
@@ -25,7 +33,7 @@ describe('Auth Tests', () => {
 
 
         const response = await request.post('/signin')
-            .auth('sultan6111', 'test@12341')
+            .auth('yzn33', 'yzn1222')
         const userObject = response.body;
         expect(response.status).toBe(200);
         expect(userObject.user).toBeDefined();
@@ -43,6 +51,22 @@ describe('Auth Tests', () => {
         expect(userObject.token).not.toBeDefined()
     });
 
+    it(' ADMIN TEST ROUTE FOR GETTING USERS  ', async () => {
+
+        const response = await request.post('/signin').auth('yzn33', 'yzn1222');
+
+
+        const token = response.body.token;
+
+        const bearerResponse = await request
+            .get('/users')
+            .set('Authorization', `Bearer ${token}`)
+
+        expect(response.status).toEqual(200);
+    });
+
+
+
 
 
 })
@@ -54,7 +78,7 @@ describe('my API Server', () => {
 
     // add scenarios & test cases 
     it('handles not found request', async () => {
-       
+
         const response = await request.get('/asd'); // async
         expect(response.status).toEqual(404);
     });
@@ -77,19 +101,8 @@ describe('my API Server', () => {
 });
 // =====================================================================
 
-describe('product (authenticated API) routes', ()=> {
-    let obj = {
-        title: 'car fixing',
-        image: 'tbfdsdsad3rg3egs54',
-        description: "car fix on computer",
-        phoneNumber: "07909090"
+describe('FAILED ROUTE: product (authenticated API) routes', () => {
 
-    }
-    
-    it(' show all product  ', async () => {
-        const response = await request.get('/product/mechanic').send(obj);
-        expect(response.status).toEqual(200);
-    });
 
     it('failed add product  ', async () => {
         const response = await request.post('/product/mechanic').send(obj);
@@ -112,96 +125,74 @@ describe('product (authenticated API) routes', ()=> {
         expect(response.status).toEqual(500);
     });
 
+});
+/*************************************************************** */
+describe('WORKING ROUTE: product (authenticated API) routes', () => {
+
+    it(' show all product  ', async () => {
+        const response = await request.get('/product/mechanic').send(obj);
+        expect(response.status).toEqual(200);
+    });
+
+    it(' get product  ', async () => {
+
+        const response = await request.post('/signin').auth('yzn33', 'yzn1222');
 
 
-})
+        const token = response.body.token;
 
-// ==========================
-// describe('My API tests 3', function() {
+        const bearerResponse = await request
+            .get('/product/mechanic')
+            .set('Authorization', `Bearer ${token}`)
 
-//     var token = null;
-  
-//     before(function(done) {
-//       request(url)
-//         .post('/user/token')
-//         .send({ _id: user1._id, password: user1.password })
-//         .end(function(err, res) {
-//           token = res.body.token; // Or something
-//           done();
-//         });
-//     });
-  
-//     it('should get a valid token for user: user1', function(done) { 
-//       request('/get/user')
-//         .set('Authorization', 'Bearer ' + token)
-//         .expect(200, done);
-//     });
-//   });
-// ==========================
+        expect(response.status).toEqual(200);
+    });
 
-// const jwt = require('jsonwebtoken')
-// process.env.SECRET = "SECRET KEY";
-// const middleware = require('../src/auth/middleware/bearer.middle');
-// const { db, users } = require('../src/auth/models/index');
+    it(' post product  ', async () => {
+
+        const response = await request.post('/signin').auth('yzn33', 'yzn1222');
 
 
-// let userInfo = {
-//     admin: { username: 'admin', password: 'password' },
-//   };
-  
-//   // Pre-load our database with fake UserModel
-//   beforeAll(async (done) => {
-//     await db.sync();
-//     await users.create(userInfo.admin);
-//     done();
-//   });
-//   afterAll(async (done) => {
-//     await db.drop();
-//     done();
-//   });
-  
-//   describe('Auth Middleware', () => {
-  
-//     // Mock the express req/res/next that we need for each middleware call
-//     const req = {};
-//     const res = {
-//       status: jest.fn(() => res),
-//       send: jest.fn(() => res)
-//     }
-//     const next = jest.fn();
-  
-//     describe('user authentication', () => {
-  
-//       it('fails a login for a user (admin) with an incorrect token', () => {
-  
-//         req.headers = {
-//           authorization: 'Bearer thisisabadtoken',
-//         };
-  
-//         return middleware(req, res, next)
-//           .then(() => {
-//             expect(next).not.toHaveBeenCalled();
-//             expect(res.status).toHaveBeenCalledWith(403);
-//           });
-  
-//       });
-  
-//       it('logs in a user with a proper token', () => {
-  
-//         const user = { username: 'admin' };
-//         const token = jwt.sign(user, process.env.SECRET);
-  
-//         req.headers = {
-//           authorization: `Bearer ${token}`,
-//         };
-  
-//         return middleware(req, res, next)
-//           .then(() => {
-//             expect(next).toHaveBeenCalledWith();
-//           });
-  
-//       });
-  
-//     });
-  
-//   });
+        const token = response.body.token;
+
+        const bearerResponse = await request
+            .post('/product/mechanic')
+            .send(obj)
+            .set('Authorization', `Bearer ${token}`)
+
+        expect(response.status).toEqual(200);
+    });
+
+
+    it(' update product  ', async () => {
+
+        const response = await request.post('/signin').auth('yzn33', 'yzn1222');
+
+
+        const token = response.body.token;
+
+        const bearerResponse = await request
+            .put('/product/mechanic/1')
+            .send(obj)
+            .set('Authorization', `Bearer ${token}`)
+
+        expect(response.status).toEqual(200);
+    });
+
+
+    it(' delete product  ', async () => {
+
+        const response = await request.post('/signin').auth('yzn33', 'yzn1222');
+
+
+        const token = response.body.token;
+
+        const bearerResponse = await request
+            .delete('/product/mechanic/1')
+            .set('Authorization', `Bearer ${token}`)
+
+        expect(response.status).toEqual(200);
+    });
+
+});
+
