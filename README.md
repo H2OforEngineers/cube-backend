@@ -117,18 +117,19 @@ The website is very starter friendly. The reason for that is it is very basic in
     "description":"car fix",
     "phoneNumber":"089090909"
 
-## Routs
+## Routes
  * product/mechanic
  * product/architec
  * product/electric
  * product/civil
 
-## Presentation Linke
+## Presentation Link
 
 [Cube presentation](https://www.canva.com/design/DAEpPQT-Jes/share/preview?token=LR-EujvrUf6dq89rQUlqBg&role=EDITOR&utm_content=DAEpPQT-Jes&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
 
+## Heroku Deployment
+[Heroku Deployment Link](https://cube-engineer.herokuapp.com)
 
-    
 **Best reagrds**
 
 > From Tech-geek-team.
