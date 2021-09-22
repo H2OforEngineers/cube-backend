@@ -1,5 +1,5 @@
 'use strict';
-
+const cors = require('cors');
 const express = require('express');
 require('dotenv').config();
 const app = express();
@@ -126,7 +126,7 @@ app.get('/home',(req,res)=>{
 
 app.use('*', notFound);
 app.use(errorHandler);
-
+app.use(cors());
 
 
 const start=(port)=>{
