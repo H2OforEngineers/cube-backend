@@ -1,19 +1,15 @@
 'use strict';
-
+const cors = require('cors');
 const express = require('express');
-
 require('dotenv').config();
 const app = express();
-var cors = require('cors');
-
-app.use(cors()); // Use this after the variable declaration
 app.use(express.json());
 const productRouter = require('./routes/product.route');
 const userRouter = require('./routes/user.route');
 const http = require('http'); //package or module 
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-app.use('/product',productRouter);
+app.use('/',productRouter);
 app.use(userRouter);
 
 
@@ -130,7 +126,7 @@ app.get('/home',(req,res)=>{
 
 app.use('*', notFound);
 app.use(errorHandler);
-
+app.use(cors());
 
 
 const start=(port)=>{

@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const dataModules = require('../auth/models/index');
-
+const bearerAuth = require('../auth/middleware/bearer.middle');
+const permissions = require('../auth/middleware/acl.middle');
 
 router.param('model', (req, res, next) => {
   const modelName = req.params.model;
@@ -19,10 +20,10 @@ router.param('model', (req, res, next) => {
 router.get('/:model', getAllProducts);
 
 //get product by ID
-router.get('/:model/:id', getOneProducts);
-router.post('/:model',createProduct);
-router.put('/:model/:id',updateProduct);
-router.delete('/:model/:id', deleteProduct);
+router.get('/:model/:id',bearerAuth, permissions('read'), getOneProducts);
+router.post('/:model',bearerAuth,permissions('create'),createProduct);
+router.put('/:model/:id',bearerAuth,permissions('update'), updateProduct);
+router.delete('/:model/:id',bearerAuth, permissions('delete'),deleteProduct);
 
 
 async function getAllProducts(req, res) {

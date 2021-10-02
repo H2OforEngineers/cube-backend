@@ -1,10 +1,10 @@
 'use strict';
 
 const architectModel = (sequelize, DataTypes) => sequelize.define('architect', {
-  name: { type: DataTypes.STRING, required: true },
-  category: { type: DataTypes.STRING, required: true },
+  title: { type: DataTypes.STRING, required: true },
+  image: { type: DataTypes.STRING, required: true },
   description: { type: DataTypes.STRING, required: true },
-  inStock: { type: DataTypes.INTEGER},
+  phoneNumber: { type: DataTypes.STRING},
 });
 
 module.exports = architectModel;
