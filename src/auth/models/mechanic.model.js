@@ -5,7 +5,7 @@ const mechanicModel = (sequelize, DataTypes) => sequelize.define('mechanic', {
   category: { type: DataTypes.STRING, required: true },
   description: { type: DataTypes.STRING },
   inStock: { type: DataTypes.INTEGER},
-  image: { type: DataTypes.BLOB},
+  image: { type: DataTypes.STRING},
   phoneNumber: { type: DataTypes.STRING, required: true },
   price: { type: DataTypes.STRING},
 
