@@ -15,19 +15,19 @@ class Collection {
     }
   }
 
-  async read(id) {
+  async read(user) {
     try{
       let records = null;
-      if (id) {
+      if (user) {
         // get specific row
-        records = await this.model.findOne({where: {id: id }});
+        records = await this.model.findAll({where: {user: user }});
       } else {
         // get all data
         records = await this.model.findAll();
       }
       return records;
     } catch(e) {
-      console.error('error read the record(s) for model: ', this.model.name, `id: ${id}`);
+      console.error('error read the record(s) for model: ', this.model.name, `id: ${user}`);
     }
 
   }
