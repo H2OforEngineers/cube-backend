@@ -4,7 +4,8 @@ const express = require('express');
 
 require('dotenv').config();
 const app = express();
-var cors = require('cors');
+const cors = require('cors');
+const multer  = require('multer')
 
 app.use(cors()); // Use this after the variable declaration
 app.use(express.json());
@@ -18,6 +19,30 @@ app.use(userRouter);
 
 
 
+//=================================================
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
+
+app.use('/a',express.static('/b'))
+app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('uploads'));
+app.post('/profile-upload-single', upload.single('profile-file'), function (req, res, next) {
+  // req.file is the `profile-file` file
+  // req.body will hold the text fields, if there were any
+  console.log(JSON.stringify(req.file))
+  var response = '<a href="/">Home</a><br>'
+  response += "Files uploaded successfully.<br>"
+  response += `<img src="${req.file.path}" /><br>`
+  return res.send(response)
+})
 //=================================================
 
 const path = require('path'); //node js core module to read    public file?
