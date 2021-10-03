@@ -8,6 +8,10 @@ const mechanicModel = (sequelize, DataTypes) => sequelize.define('mechanic', {
   image: { type: DataTypes.STRING},
   phoneNumber: { type: DataTypes.STRING, required: true },
   price: { type: DataTypes.STRING},
+  user: { type: DataTypes.STRING},
+
+ 
+
 
 });
 
