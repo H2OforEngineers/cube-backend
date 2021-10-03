@@ -14,7 +14,9 @@ let sequelizeOptions = {
     }
 };
 
+
 let sequelize = new Sequelize(DATABASE_URL, sequelizeOptions);
+
 
 
 
